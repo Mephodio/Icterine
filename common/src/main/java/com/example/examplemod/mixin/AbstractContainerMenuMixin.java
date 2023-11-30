@@ -43,37 +43,43 @@ abstract class AbstractContainerMenuMixin {
     @Shadow
     protected abstract void synchronizeDataSlotToRemote(int i, int j);
 
-    @Redirect(method = "addSlotListener", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/AbstractContainerMenu;broadcastChanges()V"))
-    public void addSlotListenerBroadcastRedirect(AbstractContainerMenu obj) {
-        ((AbstractContainerMenuMixin) (Object) obj).initBroadcastChanges();
+    @Redirect(method = "addSlot", at = @At(value="INVOKE", target = "Lnet/minecraft/core/NonNullList;add(Ljava/lang/Object;)Z", ordinal = 1))
+    protected boolean addSlot(NonNullList lastSlots, Object emptyStack, Slot slot) {
+        lastSlots.add(slot.getItem());
+        return true;
     }
 
-    @Unique
-    public void initBroadcastChanges() {
-        int i;
-        for(i = 0; i < this.slots.size(); ++i) {
-            Slot slot = (Slot)this.slots.get(i);
-            ItemStack itemStack = slot.getItem();
-            Objects.requireNonNull(itemStack);
-            Supplier<ItemStack> supplier = Suppliers.memoize(itemStack::copy);
-            // Slots haven't changed yet, not reason to trigger listeners?
-//            if (!(slot.container instanceof Inventory) && !itemStack.isEmpty()) {
-//                this.triggerSlotListeners(i, itemStack, supplier);
+//    @Redirect(method = "addSlotListener", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/AbstractContainerMenu;broadcastChanges()V"))
+//    public void addSlotListenerBroadcastRedirect(AbstractContainerMenu obj) {
+//        ((AbstractContainerMenuMixin) (Object) obj).initBroadcastChanges();
+//    }
+
+//    @Unique
+//    public void initBroadcastChanges() {
+//        int i;
+//        for(i = 0; i < this.slots.size(); ++i) {
+//            Slot slot = (Slot)this.slots.get(i);
+//            ItemStack itemStack = slot.getItem();
+//            Objects.requireNonNull(itemStack);
+//            Supplier<ItemStack> supplier = Suppliers.memoize(itemStack::copy);
+//            // Slots haven't changed yet, not reason to trigger listeners?
+////            if (!(slot.container instanceof Inventory) && !itemStack.isEmpty()) {
+////                this.triggerSlotListeners(i, itemStack, supplier);
+////            }
+//            this.synchronizeSlotToRemote(i, itemStack, supplier);
+//        }
+//
+//        this.synchronizeCarriedToRemote();
+//
+//        for(i = 0; i < this.dataSlots.size(); ++i) {
+//            DataSlot dataSlot = (DataSlot)this.dataSlots.get(i);
+//            int j = dataSlot.get();
+//            if (dataSlot.checkAndClearUpdateFlag()) {
+//                this.updateDataSlotListeners(i, j);
 //            }
-            this.synchronizeSlotToRemote(i, itemStack, supplier);
-        }
-
-        this.synchronizeCarriedToRemote();
-
-        for(i = 0; i < this.dataSlots.size(); ++i) {
-            DataSlot dataSlot = (DataSlot)this.dataSlots.get(i);
-            int j = dataSlot.get();
-            if (dataSlot.checkAndClearUpdateFlag()) {
-                this.updateDataSlotListeners(i, j);
-            }
-
-            this.synchronizeDataSlotToRemote(i, j);
-        }
-
-    }
+//
+//            this.synchronizeDataSlotToRemote(i, j);
+//        }
+//
+//    }
 }
