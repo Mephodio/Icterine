@@ -16,7 +16,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.examplemod.ExampleMod"
+            "pm.meh.icterine.Icterine"
         ]
     },
     "mixins": [

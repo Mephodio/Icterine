@@ -1,6 +1,6 @@
-package com.example.examplemod.mixin;
+package pm.meh.icterine.mixin;
 
-import com.example.examplemod.iface.IItemStackMixin;
+import pm.meh.icterine.iface.IItemStackMixin;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,7 +17,7 @@ abstract class InventoryChangeTriggerMixin {
     public void trigger(ServerPlayer serverPlayer, Inventory inventory, ItemStack itemStack, CallbackInfo ci) {
         System.out.println("called trigger for " + itemStack);
         if (itemStack.isEmpty()
-                || ((IItemStackMixin) (Object) itemStack).icto$isLastChangeDecreasedStack()) {
+                || ((IItemStackMixin) (Object) itemStack).icterine$isLastChangeDecreasedStack()) {
             ci.cancel();
             System.out.println("cancelled trigger for " + itemStack);
         }

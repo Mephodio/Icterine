@@ -1,6 +1,6 @@
-package com.example.examplemod.mixin;
+package pm.meh.icterine.mixin;
 
-import com.example.examplemod.iface.IItemStackMixin;
+import pm.meh.icterine.iface.IItemStackMixin;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -37,7 +37,7 @@ abstract class AbstractContainerMenuMixin {
             ItemStack oldStack, boolean clientStackChanged, ItemStack newStack1) {
         System.out.println("stack changed: " + oldStack.toString() + " " + newStack1.toString());
         if (newStack1.sameItem(oldStack) && newStack1.getCount() < oldStack.getCount()) {
-            ((IItemStackMixin) (Object) newStack1).icto$setLastChangeDecreasedStack(true);
+            ((IItemStackMixin) (Object) newStack1).icterine$setLastChangeDecreasedStack(true);
         }
     }
 }
