@@ -1,5 +1,6 @@
 package com.example.examplemod.mixin;
 
+import com.example.examplemod.iface.IItemStackMixin;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -17,16 +18,10 @@ import java.util.function.Supplier;
 @Mixin(AbstractContainerMenu.class)
 abstract class AbstractContainerMenuMixin {
 
-    @Redirect(method = "addSlot", at = @At(value="INVOKE", target = "Lnet/minecraft/core/NonNullList;add(Ljava/lang/Object;)Z", ordinal = 1))
+    @Redirect(method = "addSlot(Lnet/minecraft/world/inventory/Slot;)Lnet/minecraft/world/inventory/Slot;",
+            at = @At(value="INVOKE", target = "Lnet/minecraft/core/NonNullList;add(Ljava/lang/Object;)Z", ordinal = 1))
     protected boolean addSlot(NonNullList<ItemStack> lastSlots, Object emptyStack, Slot slot) {
         if (slot.container instanceof Inventory) {
-            /*
-                 YOU CANT DO THIS, you cannot check class of containerMenu, player slots are in all inventories.
-                 Check slot container, if available
-
-                 And in `triggerSlotListeners` you somehow need to detect is it ServerPlayer or not,
-                 and same thing with RecipeBookMenu check
-             */
             lastSlots.add(slot.getItem());
         } else {
             lastSlots.add(ItemStack.EMPTY);
@@ -34,11 +29,15 @@ abstract class AbstractContainerMenuMixin {
         return true;
     }
 
-    @Inject(method = "triggerSlotListeners",
+    @Inject(method = "triggerSlotListeners(ILnet/minecraft/world/item/ItemStack;Ljava/util/function/Supplier;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/core/NonNullList;set(ILjava/lang/Object;)Ljava/lang/Object;"),
             locals = LocalCapture.CAPTURE_FAILHARD)
     private void triggerSlotListenersSaveOld(int slotNumber, ItemStack newStack,
-            Supplier<ItemStack> newStackSupplier, CallbackInfo ci, ItemStack oldStack) {
-//        System.out.println("stack changed: " + oldStack.toString() + " " + newStack.toString());
+            Supplier<ItemStack> newStackSupplier, CallbackInfo ci,
+            ItemStack oldStack, boolean clientStackChanged, ItemStack newStack1) {
+        System.out.println("stack changed: " + oldStack.toString() + " " + newStack1.toString());
+        if (newStack1.sameItem(oldStack) && newStack1.getCount() < oldStack.getCount()) {
+            ((IItemStackMixin) (Object) newStack1).icto$setLastChangeDecreasedStack(true);
+        }
     }
 }
