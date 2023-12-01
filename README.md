@@ -5,8 +5,9 @@ Changes:
 * [x] Do not perform scan if new item is air
 * [x] Do not perform scan when opening inventory
   * Do not call `triggerSlotListeners` in `broadcastChanges` when called from `addSlotListener`
-* [ ] When checking criterion and it has zero item requirements, skip criterion
-* [ ] When checking criterion and it has single item requirement, check only changed item instead of full inventory
+* [x] ~~When checking criterion and it has zero item requirements, skip criterion~~ already in vanilla
+* [x] ~~When checking criterion and it has single item requirement, check only changed item instead of full inventory~~ already in vanilla
+* [x] When checking criterion and it has multiple item requirements, first check if changed item matches any of them, and only then scan full inventory
 * [x] In slotChanged: if new slot is air or same item with smaller amount, do not call slotChanged
 
 ## Do not perform scan when opening inventory
