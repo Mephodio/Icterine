@@ -1,6 +1,7 @@
-package pm.meh.icterine;
+package pm.meh.icterine.util;
 
 import org.simpleyaml.configuration.file.YamlConfiguration;
+import pm.meh.icterine.Common;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 public class Config {
 
-    private static final String configFileName = Constants.MOD_ID + ".yml";
+    private static final String configFileName = Common.MOD_ID + ".yml";
 
     public final boolean DEBUG_MODE;
     public final boolean IGNORE_TRIGGERS_FOR_EMPTIED_STACKS;

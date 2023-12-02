@@ -6,6 +6,6 @@ public class Icterine implements ModInitializer {
     
     @Override
     public void onInitialize() {
-        CommonClass.init();
+        Common.init();
     }
 }

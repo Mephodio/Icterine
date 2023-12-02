@@ -1,7 +1,6 @@
 package pm.meh.icterine.util;
 
 import net.minecraft.world.item.ItemStack;
-import pm.meh.icterine.Constants;
 import pm.meh.icterine.iface.IItemStackMixin;
 
 public class ItemStackUtil {
