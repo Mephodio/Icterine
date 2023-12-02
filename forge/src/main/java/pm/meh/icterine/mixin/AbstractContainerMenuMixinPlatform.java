@@ -12,7 +12,7 @@ import pm.meh.icterine.util.ItemStackUtil;
 import java.util.function.Supplier;
 
 @Mixin(AbstractContainerMenu.class)
-abstract class AbstractContainerMenuMixinForge {
+abstract class AbstractContainerMenuMixinPlatform {
 
     @Inject(method = "triggerSlotListeners(ILnet/minecraft/world/item/ItemStack;Ljava/util/function/Supplier;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/core/NonNullList;set(ILjava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.AFTER),

@@ -10,9 +10,8 @@ public class Common {
     public static final String MOD_NAME = "Icterine";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
 
-    public static Config config;
+    public static final Config config = new Config();
 
     public static void init() {
-        config = new Config();
     }
 }
