@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import pm.meh.icterine.util.LogHelper;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ abstract class InventoryChangeTriggerInstanceMixin extends AbstractCriterionTrig
             CallbackInfoReturnable<Boolean> cir, int predicatesLength, List<ItemPredicate> predicatesList) {
         // If no predicate in list matches the changed item, the trigger not matches
         if (!predicatesList.removeIf(itemPredicate -> itemPredicate.matches(itemStack))) {
+            LogHelper.debug("Trigger has multiple predicates, and none of them matches changed item. Skipping full inventory check");
             cir.setReturnValue(false);
             cir.cancel();
         }

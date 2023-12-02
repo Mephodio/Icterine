@@ -1,6 +1,7 @@
 package pm.meh.icterine.mixin;
 
 import pm.meh.icterine.iface.IItemStackMixin;
+import pm.meh.icterine.util.LogHelper;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,11 +16,12 @@ abstract class InventoryChangeTriggerMixin {
     @Inject(method = "trigger(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/item/ItemStack;)V",
             at = @At(value = "HEAD"), cancellable = true)
     public void trigger(ServerPlayer serverPlayer, Inventory inventory, ItemStack itemStack, CallbackInfo ci) {
-        System.out.println("called trigger for " + itemStack);
         if (itemStack.isEmpty()
                 || ((IItemStackMixin) (Object) itemStack).icterine$isLastChangeDecreasedStack()) {
             ci.cancel();
-            System.out.println("cancelled trigger for " + itemStack);
+            LogHelper.debug("InventoryChangeTrigger cancelled for " + itemStack);
+        } else {
+            LogHelper.debug("InventoryChangeTrigger passed for " + itemStack);
         }
     }
 }
