@@ -1,5 +1,7 @@
 package pm.meh.icterine.mixin;
 
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.Surrogate;
 import pm.meh.icterine.iface.IItemStackMixin;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,15 +31,32 @@ abstract class AbstractContainerMenuMixin {
         return true;
     }
 
+    // Fabric for some reason doesn't have separate local variable clientStackChanged, so we have overload
+    @Surrogate
     @Inject(method = "triggerSlotListeners(ILnet/minecraft/world/item/ItemStack;Ljava/util/function/Supplier;)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/core/NonNullList;set(ILjava/lang/Object;)Ljava/lang/Object;"),
-            locals = LocalCapture.CAPTURE_FAILHARD)
-    private void triggerSlotListenersSaveOld(int slotNumber, ItemStack newStack,
-            Supplier<ItemStack> newStackSupplier, CallbackInfo ci,
-            ItemStack oldStack, boolean clientStackChanged, ItemStack newStack1) {
-        System.out.println("stack changed: " + oldStack.toString() + " " + newStack1.toString());
-        if (newStack1.sameItem(oldStack) && newStack1.getCount() < oldStack.getCount()) {
-            ((IItemStackMixin) (Object) newStack1).icterine$setLastChangeDecreasedStack(true);
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/core/NonNullList;set(ILjava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.AFTER),
+            locals = LocalCapture.CAPTURE_FAILSOFT)
+    private void triggerSlotListeners(int slotNumber, ItemStack newStack,
+                                      Supplier<ItemStack> newStackSupplier, CallbackInfo ci,
+                                      ItemStack oldStack, boolean clientStackChanged, ItemStack newStack1) {
+        icterine$processItemStackInTriggerSlotListeners(oldStack, newStack1);
+    }
+
+    @Surrogate
+    @Inject(method = "triggerSlotListeners(ILnet/minecraft/world/item/ItemStack;Ljava/util/function/Supplier;)V",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/core/NonNullList;set(ILjava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.AFTER),
+            locals = LocalCapture.CAPTURE_FAILSOFT)
+    private void triggerSlotListeners(int slotNumber, ItemStack newStack,
+                                      Supplier<ItemStack> newStackSupplier, CallbackInfo ci,
+                                      ItemStack oldStack, ItemStack newStack1) {
+        icterine$processItemStackInTriggerSlotListeners(oldStack, newStack1);
+    }
+
+    @Unique
+    private void icterine$processItemStackInTriggerSlotListeners(ItemStack oldStack, ItemStack newStack) {
+        System.out.println("stack changed: " + oldStack.toString() + " " + newStack.toString());
+        if (newStack.sameItem(oldStack) && newStack.getCount() < oldStack.getCount()) {
+            ((IItemStackMixin) (Object) newStack).icterine$setLastChangeDecreasedStack(true);
         }
     }
 }
