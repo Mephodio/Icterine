@@ -1,0 +1,5 @@
+debug_mode: true
+ignore_triggers_for_emptied_stacks: true
+ignore_triggers_for_decreased_stacks: true
+optimize_multiple_predicate_trigger: true
+initialize_inventory_last_slots: true

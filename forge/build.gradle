@@ -78,6 +78,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+    // See https://gist.github.com/SizableShrimp/66b22f1b24c255e1491c8d98d3f11f83
+    minecraftLibrary 'com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4'
 }
 
 tasks.withType(JavaCompile).configureEach {
