@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import pm.meh.icterine.util.LogHelper;
 
 @Mixin(AbstractContainerMenu.class)
 abstract class AbstractContainerMenuMixin {
@@ -26,7 +27,8 @@ abstract class AbstractContainerMenuMixin {
     @Redirect(method = "addSlot(Lnet/minecraft/world/inventory/Slot;)Lnet/minecraft/world/inventory/Slot;",
             at = @At(value="INVOKE", target = "Lnet/minecraft/core/NonNullList;add(Ljava/lang/Object;)Z", ordinal = 1))
     protected boolean addSlot(NonNullList<ItemStack> lastSlots, Object emptyStack, Slot slot) {
-        if (slot.container instanceof Inventory) {
+        if (slot.container instanceof Inventory && slot.hasItem()) {
+            LogHelper.debug("Adding " + slot.getItem() + " to lastSlots");
             lastSlots.add(slot.getItem());
         } else {
             lastSlots.add(ItemStack.EMPTY);
