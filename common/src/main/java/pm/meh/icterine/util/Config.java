@@ -1,13 +1,15 @@
 package pm.meh.icterine.util;
 
-import org.simpleyaml.configuration.file.YamlConfiguration;
 import pm.meh.icterine.Common;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Config {
 
@@ -19,24 +21,45 @@ public class Config {
     public final boolean OPTIMIZE_MULTIPLE_PREDICATE_TRIGGER;
     public final boolean INITIALIZE_INVENTORY_LAST_SLOTS;
 
+    private final Map<String, String> configData = new HashMap<>();
+
     public Config() {
-        // Try to load config
-        Path configFile = Paths.get("config", configFileName);
-        YamlConfiguration config;
         try {
-            if (!Files.exists(configFile)) {
-                Files.copy(Objects.requireNonNull(getClass().getResourceAsStream('/' + configFileName)), configFile);
-            }
-            config = YamlConfiguration.loadConfiguration(configFile.toFile());
+            load(Paths.get("config", configFileName));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        DEBUG_MODE = config.getBoolean("debug_mode");
-        IGNORE_TRIGGERS_FOR_EMPTIED_STACKS = config.getBoolean("ignore_triggers_for_emptied_stacks");
-        IGNORE_TRIGGERS_FOR_DECREASED_STACKS = config.getBoolean("ignore_triggers_for_decreased_stacks");
-        OPTIMIZE_MULTIPLE_PREDICATE_TRIGGER = config.getBoolean("optimize_multiple_predicate_trigger");
-        INITIALIZE_INVENTORY_LAST_SLOTS = config.getBoolean("initialize_inventory_last_slots");
+        DEBUG_MODE = getBoolean("debug_mode", false);
+        IGNORE_TRIGGERS_FOR_EMPTIED_STACKS = getBoolean("ignore_triggers_for_emptied_stacks", true);
+        IGNORE_TRIGGERS_FOR_DECREASED_STACKS = getBoolean("ignore_triggers_for_decreased_stacks", true);
+        OPTIMIZE_MULTIPLE_PREDICATE_TRIGGER = getBoolean("optimize_multiple_predicate_trigger", true);
+        INITIALIZE_INVENTORY_LAST_SLOTS = getBoolean("initialize_inventory_last_slots", true);
+    }
+
+    private void load(Path configPath) throws IOException {
+        if (!Files.exists(configPath)) {
+            Files.copy(Objects.requireNonNull(getClass().getResourceAsStream('/' + configFileName)), configPath);
+        }
+        try (Stream<String> lines = Files.lines(configPath)) {
+            lines.forEach(line -> {
+                    if (!line.trim().isEmpty() && line.charAt(0) != '#') {
+                        String[] parts = line.split(": ");
+                        if (parts.length != 2) {
+                            throw new RuntimeException("Invalid config parameter:\n" + line);
+                        }
+                        configData.put(parts[0], parts[1]);
+                    }
+                });
+        }
+    }
+
+    private boolean getBoolean(String key, boolean defaultValue) {
+        String value = configData.get(key);
+        if (value == null) {
+            return defaultValue;
+        }
+        return value.equals("true");
     }
 
 }
