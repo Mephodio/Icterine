@@ -10,7 +10,7 @@
     "contact": {
         "sources": "${source_code}",
         "issues": "${issue_tracker}",
-        "discord": "${discord}"
+        "homepage": "${discord}"
     },
     "license": "${license}",
     "icon": "${mod_id}.png",
