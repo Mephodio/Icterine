@@ -69,10 +69,13 @@ subprojects {
                 "mod_id": mod_id,
                 "license": license,
                 "description": project.description,
-                "credits": credits
+                "credits": credits,
+                "issue_tracker": issue_tracker,
+                "source_code": source_code,
+                "discord": discord
         ]
 
-        filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {
+        filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', '*.mixins.json', 'icterine.yml']) {
             expand expandProps
         }
         inputs.properties(expandProps)

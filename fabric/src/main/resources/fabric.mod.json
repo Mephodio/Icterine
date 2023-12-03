@@ -8,11 +8,12 @@
         "${mod_author}"
     ],
     "contact": {
-        "sources": "https://github.com/Mephodio/Icterine",
-        "discord": "https://discord.gg/2SpfwvM7dm"
+        "sources": "${source_code}",
+        "issues": "${issue_tracker}",
+        "discord": "${discord}"
     },
     "license": "${license}",
-    "icon": "assets/${mod_id}/icon.png",
+    "icon": "${mod_id}.png",
     "environment": "*",
     "entrypoints": {
         "main": [

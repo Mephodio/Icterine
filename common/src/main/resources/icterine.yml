@@ -1,5 +1,5 @@
-# Report issues on Github https://github.com/Mephodio/Icterine/issues
-# Discuss, get help or report issues on Discord https://discord.gg/2SpfwvM7dm
+# Report issues on Github ${issue_tracker}
+# Discuss, get help or report issues on Discord ${discord}
 
 # Enables debug logs
 debug_mode: false
