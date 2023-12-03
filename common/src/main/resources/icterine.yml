@@ -1,5 +1,25 @@
+# Report issues on Github https://github.com/Mephodio/Icterine/issues
+# Discuss, get help or report issues on Discord https://discord.gg/2SpfwvM7dm
+
+# Enables debug logs
 debug_mode: true
+
+# Cancels advancement check when stack becomes empty (for example, when player throws out the whole stack).
+# Injects into InventoryChangeTrigger.
+# Disable if you have mixin conflict or some advancements became unobtainable (and also report on github/discord!).
 ignore_triggers_for_emptied_stacks: true
+
+# Cancels advancement check when stack size decreases (for example, when player throws out one item from stack).
+# Injects into InventoryChangeTrigger, ItemStack, AbstractContainerMenu.
+# Disable if you have mixin conflict or some advancements became unobtainable (and also report on github/discord!).
 ignore_triggers_for_decreased_stacks: true
+
+# Optimizes advancement check for advancements that require multiple items (for example, "Cover me in debris" requires full netherite armor set).
+# Injects into InventoryChangeTriggerInstance.
+# Disable if you have mixin conflict or some advancements became unobtainable (and also report on github/discord!).
 optimize_multiple_predicate_trigger: true
+
+# Disables advancement check when you just open any container (for example, chest or backpack).
+# Injects into AbstractContainerMenu.
+# Disable if you have mixin conflict or problems with any container (and also report on github/discord!).
 initialize_inventory_last_slots: true
