@@ -2,7 +2,7 @@
 # Discuss, get help or report issues on Discord https://discord.gg/2SpfwvM7dm
 
 # Enables debug logs
-debug_mode: true
+debug_mode: false
 
 # Cancels advancement check when stack becomes empty (for example, when player throws out the whole stack).
 # Injects into InventoryChangeTrigger.
