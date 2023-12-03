@@ -8,8 +8,8 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "sources": "https://github.com/Mephodio/Icterine",
+        "discord": "https://discord.gg/2SpfwvM7dm"
     },
     "license": "${license}",
     "icon": "assets/${mod_id}/icon.png",
