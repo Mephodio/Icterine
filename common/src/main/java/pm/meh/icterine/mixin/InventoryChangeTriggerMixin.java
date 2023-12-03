@@ -14,6 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InventoryChangeTrigger.class)
 abstract class InventoryChangeTriggerMixin {
+    /**
+     * This injection cancels triggering advancement scan for changed slot
+     * if this trigger was caused by emptying or decreasing the stack size.
+     */
     @Inject(method = "trigger(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/item/ItemStack;)V",
             at = @At(value = "HEAD"), cancellable = true)
     public void trigger(ServerPlayer serverPlayer, Inventory inventory, ItemStack itemStack, CallbackInfo ci) {

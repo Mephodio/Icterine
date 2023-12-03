@@ -14,6 +14,17 @@ import java.util.function.Supplier;
 @Mixin(AbstractContainerMenu.class)
 abstract class AbstractContainerMenuMixinPlatform {
 
+    /**
+     * When slot content changes, this injected code compares old and new stack
+     * to determine if change was caused by decreasing stack size.
+     * <br>
+     * For some reason (differences in decompiling/mapping maybe?), on Forge and Fabric
+     * this mixin detects different local variables.
+     * <br> On forge: `ItemStack`, `boolean`, `ItemStack`
+     * <br> On fabric: `ItemStack`, `ItemStack`
+     * <br>
+     * So we need platform-specific mixins with different locals sets.
+     */
     @Inject(method = "triggerSlotListeners(ILnet/minecraft/world/item/ItemStack;Ljava/util/function/Supplier;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/core/NonNullList;set(ILjava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILHARD)

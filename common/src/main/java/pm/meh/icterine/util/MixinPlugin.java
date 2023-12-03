@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * This plugin disables loading specific mixins based on settings in config file.
+ */
 public class MixinPlugin implements IMixinConfigPlugin {
 
     private static final Map<String, Boolean> CONDITIONS = ImmutableMap.of(
