@@ -1,6 +1,6 @@
 # InventoryChangeTrigger Optimization
 
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/2SpfwvM7dm)
+[![Modrinth](https://img.shields.io/modrinth/dt/7RvRWn6p?style=for-the-badge&logo=modrinth&label=Modrinth)](https://modrinth.com/mod/icterine) [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/2SpfwvM7dm)
 
 ## Summary
 
