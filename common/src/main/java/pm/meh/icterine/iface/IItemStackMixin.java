@@ -5,16 +5,14 @@ package pm.meh.icterine.iface;
  */
 public interface IItemStackMixin {
     /**
-     * Set the value of lastChangeDecreasedStack, which indicates if last stack
-     * change decreased its size, for example item was thrown.
-     * @param value true if last change decreased stack size
+     * Save the previous stack size, before inventory change.
+     * @param value previous value
      */
-    void icterine$setLastChangeDecreasedStack(boolean value);
+    void icterine$setPreviousStackSize(int value);
 
     /**
-     * Get the value of lastChangeDecreasedStack, which indicates if last stack
-     * change decreased its size, for example item was thrown.
-     * @return true if last change decreased stack size
+     * Get the previous stack size, before inventory change.
+     * @return previous value
      */
-    boolean icterine$isLastChangeDecreasedStack();
+    int icterine$getPreviousStackSize();
 }

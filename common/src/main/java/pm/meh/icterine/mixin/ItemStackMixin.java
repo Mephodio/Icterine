@@ -8,15 +8,15 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(ItemStack.class)
 public class ItemStackMixin implements IItemStackMixin {
     @Unique
-    private boolean icterine$lastChangeDecreasedStack;
+    private int icterine$previousStackSize;
 
     @Override
-    public void icterine$setLastChangeDecreasedStack(boolean value) {
-        icterine$lastChangeDecreasedStack = value;
+    public void icterine$setPreviousStackSize(int value) {
+        icterine$previousStackSize = value;
     }
 
     @Override
-    public boolean icterine$isLastChangeDecreasedStack() {
-        return icterine$lastChangeDecreasedStack;
+    public int icterine$getPreviousStackSize() {
+        return icterine$previousStackSize;
     }
 }

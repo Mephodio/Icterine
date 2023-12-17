@@ -23,7 +23,7 @@ abstract class InventoryChangeTriggerMixin {
     public void trigger(ServerPlayer serverPlayer, Inventory inventory, ItemStack itemStack, CallbackInfo ci) {
         if ((itemStack.isEmpty() && Common.config.IGNORE_TRIGGERS_FOR_EMPTIED_STACKS)
                 || (Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS
-                    && ((IItemStackMixin) (Object) itemStack).icterine$isLastChangeDecreasedStack())) {
+                    && itemStack.getCount() < ((IItemStackMixin) (Object) itemStack).icterine$getPreviousStackSize())) {
             ci.cancel();
             LogHelper.debug("InventoryChangeTrigger cancelled for " + itemStack);
         } else {

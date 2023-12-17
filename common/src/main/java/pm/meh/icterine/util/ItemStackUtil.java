@@ -24,8 +24,8 @@ public class ItemStackUtil {
      */
     public static void processItemStackInTriggerSlotListeners(ItemStack oldStack, ItemStack newStack) {
         LogHelper.debug("Stack changed from " + oldStack + " to " + newStack);
-        if (newStack.sameItem(oldStack) && newStack.getCount() < oldStack.getCount()) {
-            ((IItemStackMixin) (Object) newStack).icterine$setLastChangeDecreasedStack(true);
+        if (newStack.sameItem(oldStack)) {
+            ((IItemStackMixin) (Object) newStack).icterine$setPreviousStackSize(oldStack.getCount());
         }
     }
 }
