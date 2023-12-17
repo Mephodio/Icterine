@@ -23,3 +23,7 @@ optimize_multiple_predicate_trigger: true
 # Injects into AbstractContainerMenu.
 # Disable if you have mixin conflict or problems with any container (and also report on github/discord!).
 initialize_inventory_last_slots: true
+
+# Skips advancement check when you pick up or otherwise increase stack size if this change doesn't pass any advancement threshold
+# (for example, dirt stack size increased from 52 to 53, but there's no advancement for getting 53 dirt in your modpack).
+optimize_triggers_for_increased_stacks: true

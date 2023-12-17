@@ -2,6 +2,7 @@ package pm.meh.icterine.mixin;
 
 import pm.meh.icterine.Common;
 import pm.meh.icterine.iface.IItemStackMixin;
+import pm.meh.icterine.impl.StackSizeThresholdManager;
 import pm.meh.icterine.util.LogHelper;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,7 +24,9 @@ abstract class InventoryChangeTriggerMixin {
     public void trigger(ServerPlayer serverPlayer, Inventory inventory, ItemStack itemStack, CallbackInfo ci) {
         if ((itemStack.isEmpty() && Common.config.IGNORE_TRIGGERS_FOR_EMPTIED_STACKS)
                 || (Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS
-                    && itemStack.getCount() < ((IItemStackMixin) (Object) itemStack).icterine$getPreviousStackSize())) {
+                    && itemStack.getCount() < ((IItemStackMixin) (Object) itemStack).icterine$getPreviousStackSize())
+                || (Common.config.OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS
+                    && !StackSizeThresholdManager.doesStackPassThreshold(itemStack))) {
             ci.cancel();
             LogHelper.debug("InventoryChangeTrigger cancelled for " + itemStack);
         } else {

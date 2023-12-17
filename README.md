@@ -32,6 +32,7 @@ With Icterine, InventoryChangeTrigger executes almost **twice as fast**, spendin
 
 1. In step 1, do not call InventoryChangeTrigger when you drop stacks or move them out of your inventory (e.g. to chest). This is controlled by the `ignore_triggers_for_emptied_stacks` parameter in config file.
 2. Similarly, do not call InventoryChangeTrigger if stack change was caused by decreasing stack but not emptying it (e.g. player dropped single item from the full stack). Controlled by `ignore_triggers_for_decreased_stacks`.
+3. And also do not call InventoryChangeTrigger if stack size increased, but hasn't passed threshold for any advancement. For example, dirt stack size increased from 52 to 53, but there's no advancement for getting 53 dirt in your modpack.
 3. Modify how game checks for changed items when player opens container screen, so it doesn't treat all the stack as changed the second you open anything. Controlled by `initialize_inventory_last_slots`.
 4. In step 6, firstly check if changed slot matches any requirement, and only then check other stack in the inventory. Controlled by `optimize_multiple_predicate_trigger`.
 
