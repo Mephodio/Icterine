@@ -23,6 +23,7 @@ public class Config {
     public final boolean OPTIMIZE_MULTIPLE_PREDICATE_TRIGGER;
     public final boolean INITIALIZE_INVENTORY_LAST_SLOTS;
     public final boolean OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS;
+    public final boolean CHECK_COUNT_BEFORE_ITEM_PREDICATE_MATCH;
 
     private final Map<String, String> configData = new HashMap<>();
 
@@ -39,6 +40,7 @@ public class Config {
         OPTIMIZE_MULTIPLE_PREDICATE_TRIGGER = getBoolean("optimize_multiple_predicate_trigger", true);
         INITIALIZE_INVENTORY_LAST_SLOTS = getBoolean("initialize_inventory_last_slots", true);
         OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS = getBoolean("optimize_triggers_for_increased_stacks", true);
+        CHECK_COUNT_BEFORE_ITEM_PREDICATE_MATCH = getBoolean("check_count_before_item_predicate_match", true);
     }
 
     private void load() throws IOException {

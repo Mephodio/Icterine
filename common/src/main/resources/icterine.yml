@@ -2,6 +2,7 @@
 # Discuss, get help or report issues on Discord ${discord}
 
 # Enables debug logs
+# Will worsen your performance, please do not enable if you don't need it!
 debug_mode: false
 
 # Cancels advancement check when stack becomes empty (for example, when player throws out the whole stack).
@@ -24,6 +25,12 @@ optimize_multiple_predicate_trigger: true
 # Disable if you have mixin conflict or problems with any container (and also report on github/discord!).
 initialize_inventory_last_slots: true
 
-# Skips advancement check when you pick up or otherwise increase stack size if this change doesn't pass any advancement threshold
-# (for example, dirt stack size increased from 52 to 53, but there's no advancement for getting 53 dirt in your modpack).
+# Skips advancement check when you pick up or otherwise increase stack size if this change doesn't pass any advancement threshold.
+# For example, dirt stack size increased from 52 to 53, but there's no advancement for getting 53 dirt in your modpack.
 optimize_triggers_for_increased_stacks: true
+
+# When checking each item criterion, first check the count requirement and see if it was fulfilled before.
+# For example, there is advancement for getting stone block, any amount. You have 52 dirt, and you pick up one more. There is
+# no way you can the get stone advancement from this action, because it requires any amount of item, and you already had some.
+# Another example: there is no way you can get the advancement for 64 emerald blocks if you don't have dirt and you pick up 5 dirt.
+check_count_before_item_predicate_match: true

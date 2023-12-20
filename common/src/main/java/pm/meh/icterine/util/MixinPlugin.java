@@ -17,12 +17,14 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     private static final Map<String, Boolean> CONDITIONS = ImmutableMap.of(
             "pm.meh.icterine.mixin.AbstractContainerMenuMixin", Common.config.INITIALIZE_INVENTORY_LAST_SLOTS,
-            "pm.meh.icterine.mixin.InventoryChangeTriggerInstanceMixin", Common.config.OPTIMIZE_MULTIPLE_PREDICATE_TRIGGER,
+            "pm.meh.icterine.mixin.InventoryChangeTriggerInstanceMixin", Common.config.OPTIMIZE_MULTIPLE_PREDICATE_TRIGGER
+                    || Common.config.CHECK_COUNT_BEFORE_ITEM_PREDICATE_MATCH,
             "pm.meh.icterine.mixin.InventoryChangeTriggerMixin", Common.config.IGNORE_TRIGGERS_FOR_EMPTIED_STACKS
                     || Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS
                     || Common.config.OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS,
             "pm.meh.icterine.mixin.ItemStackMixin", Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS,
-            "pm.meh.icterine.mixin.AbstractContainerMenuMixinPlatform", Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS
+            "pm.meh.icterine.mixin.AbstractContainerMenuMixinPlatform", Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS,
+            "pm.meh.icterine.mixin.ItemPredicateMixin", Common.config.CHECK_COUNT_BEFORE_ITEM_PREDICATE_MATCH
     );
 
     @Override

@@ -9,6 +9,7 @@
     "AbstractContainerMenuMixin",
     "InventoryChangeTriggerInstanceMixin",
     "InventoryChangeTriggerMixin",
+    "ItemPredicateMixin",
     "ItemStackMixin"
   ],
   "client": [
