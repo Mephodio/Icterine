@@ -19,6 +19,11 @@ public abstract class ItemPredicateMixin implements IItemPredicateMixin {
     @Shadow
     public abstract boolean matches(ItemStack itemStack);
 
+    /**
+     * Item matching, especially against tag, is very heavy. By comparing the stack count first,
+     * we could avoid unneeded tag matching.
+     * We also could use previous stack count to avoid even more unneeded matching.
+     */
     @Override
     public boolean icterine$fasterMatches(ItemStack itemStack) {
         Integer minThr = count.getMin();

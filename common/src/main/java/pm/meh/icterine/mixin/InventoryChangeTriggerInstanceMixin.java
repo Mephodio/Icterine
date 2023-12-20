@@ -51,6 +51,9 @@ abstract class InventoryChangeTriggerInstanceMixin extends AbstractCriterionTrig
         }
     }
 
+    /**
+     * Use optimized itemPredicate match
+     */
     @Redirect(method = "matches(Lnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/item/ItemStack;III)Z",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/advancements/critereon/ItemPredicate;matches(Lnet/minecraft/world/item/ItemStack;)Z"))
     public boolean itemPredicateMatches(ItemPredicate itemPredicate, ItemStack itemStack) {

@@ -1,5 +1,7 @@
 package pm.meh.icterine.mixin;
 
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.profiling.ProfilerFiller;
 import pm.meh.icterine.Common;
 import pm.meh.icterine.iface.IItemStackMixin;
 import pm.meh.icterine.impl.StackSizeThresholdManager;
@@ -13,11 +15,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Map;
+
 @Mixin(InventoryChangeTrigger.class)
 abstract class InventoryChangeTriggerMixin {
     /**
      * This injection cancels triggering advancement scan for changed slot
-     * if this trigger was caused by emptying or decreasing the stack size.
+     * if this trigger was caused by emptying or decreasing the stack size,
+     * or if stack size increased but hasn't crossed any threshold
+     * (see {@link pm.meh.icterine.impl.ReloadListenerHandlerBase#apply(Map, ResourceManager, ProfilerFiller)})
      */
     @Inject(method = "trigger(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/item/ItemStack;)V",
             at = @At(value = "HEAD"), cancellable = true)

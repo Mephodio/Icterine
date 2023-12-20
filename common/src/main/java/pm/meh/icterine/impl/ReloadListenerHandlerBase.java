@@ -21,6 +21,14 @@ public class ReloadListenerHandlerBase extends SimpleJsonResourceReloadListener 
         super(GSON, FOLDER);
     }
 
+    /**
+     * Collects all item count thresholds from loaded advancements.
+     * For example, if there are advancements for obtaining any amount of stone,
+     * 5 emeralds and 64 sticks, thresholds will be [1, 5, 64].
+     * We then could use these thresholds to prevent unneeded advancement scanning.
+     * For example, there is no need to check advancements when dirt stack size
+     * increases from 52 to 53 if there's no advancement for getting 53 dirt.
+     */
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
         if (Common.config.OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS) {
