@@ -28,7 +28,7 @@ abstract class AbstractContainerMenuMixin {
             at = @At(value="INVOKE", target = "Lnet/minecraft/core/NonNullList;add(Ljava/lang/Object;)Z", ordinal = 1))
     protected boolean addSlot(NonNullList<ItemStack> lastSlots, Object emptyStack, Slot slot) {
         if (slot.container instanceof Inventory && slot.hasItem()) {
-            LogHelper.debug("Adding " + slot.getItem() + " to lastSlots");
+            LogHelper.debug(() -> "Adding %s to lastSlots".formatted(slot.getItem()));
             lastSlots.add(slot.getItem());
         } else {
             lastSlots.add(ItemStack.EMPTY);

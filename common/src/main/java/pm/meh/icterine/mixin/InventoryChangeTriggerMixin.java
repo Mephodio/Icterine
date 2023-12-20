@@ -28,9 +28,9 @@ abstract class InventoryChangeTriggerMixin {
                 || (Common.config.OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS
                     && !StackSizeThresholdManager.doesStackPassThreshold(itemStack))) {
             ci.cancel();
-            LogHelper.debug("InventoryChangeTrigger cancelled for " + itemStack);
+            LogHelper.debug(() -> "InventoryChangeTrigger cancelled for %s".formatted(itemStack));
         } else {
-            LogHelper.debug("InventoryChangeTrigger passed for " + itemStack);
+            LogHelper.debug(() -> "InventoryChangeTrigger passed for %s".formatted(itemStack));
         }
     }
 }

@@ -23,7 +23,7 @@ public class ItemStackUtil {
      * @param newStack new ItemStack
      */
     public static void processItemStackInTriggerSlotListeners(ItemStack oldStack, ItemStack newStack) {
-        LogHelper.debug("Stack changed from " + oldStack + " to " + newStack);
+        LogHelper.debug(() -> "Stack changed from %s to %s".formatted(oldStack, newStack));
         if (newStack.sameItem(oldStack)) {
             ((IItemStackMixin) (Object) newStack).icterine$setPreviousStackSize(oldStack.getCount());
         }

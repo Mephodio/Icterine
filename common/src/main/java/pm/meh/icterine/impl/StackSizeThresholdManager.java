@@ -39,6 +39,6 @@ public class StackSizeThresholdManager {
     }
 
     public static void debugPrint() {
-        LogHelper.debug("InventoryChangeTrigger stack size thresholds: " + stackSizeThresholds);
+        LogHelper.debug(() -> "InventoryChangeTrigger stack size thresholds: %s".formatted(stackSizeThresholds));
     }
 }

@@ -26,7 +26,7 @@ public abstract class ItemPredicateMixin implements IItemPredicateMixin {
         int stackCount = itemStack.getCount();
         int prevStackCount = ((IItemStackMixin) (Object) itemStack).icterine$getPreviousStackSize();
 
-        LogHelper.debug("Checking stack %d for range [%d; %d]".formatted(stackCount, minThr, maxThr));
+        LogHelper.debug(() -> "Checking stack %d for range [%d; %d]".formatted(stackCount, minThr, maxThr));
 
         if ((minThr == null ? prevStackCount == 0 :
                 (prevStackCount < minThr && minThr <= stackCount))

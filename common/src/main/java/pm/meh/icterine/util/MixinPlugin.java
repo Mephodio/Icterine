@@ -38,7 +38,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         boolean status = CONDITIONS.getOrDefault(mixinClassName, true);
-        LogHelper.debug("Apply mixin " + mixinClassName + ": " + status);
+        LogHelper.debug(() -> "Apply mixin %s: %s".formatted(mixinClassName, status));
         return status;
     }
 
