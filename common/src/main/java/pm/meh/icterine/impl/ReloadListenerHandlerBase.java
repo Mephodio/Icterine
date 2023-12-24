@@ -38,22 +38,23 @@ public class ReloadListenerHandlerBase extends SimpleJsonResourceReloadListener 
 
             for (JsonElement advancementElement : object.values()) {
                 JsonObject advancementCriteria = advancementElement.getAsJsonObject().getAsJsonObject("criteria");
-                if (advancementCriteria != null) {
+                if (advancementCriteria != null && !advancementCriteria.isJsonNull()) {
                     for (var criterionEntry : advancementCriteria.entrySet()) {
                         JsonObject criterion = criterionEntry.getValue().getAsJsonObject();
                         JsonElement criterionTrigger = criterion.get("trigger");
                         JsonObject criterionConditions = criterion.getAsJsonObject("conditions");
                         if (criterionTrigger != null && criterionConditions != null
+                                && !criterionTrigger.isJsonNull() && !criterionConditions.isJsonNull()
                                 && criterionTrigger.getAsString().equals(inventoryChangedTriggerId)
                                 && criterionConditions.has("items")) {
                             for (JsonElement itemElement : criterionConditions.getAsJsonArray("items")) {
                                 JsonElement itemCount = itemElement.getAsJsonObject().get("count");
-                                if (itemCount != null) {
+                                if (itemCount != null && !itemCount.isJsonNull()) {
                                     int itemCountMinValue = 0;
 
                                     if (itemCount.isJsonObject()) {
                                         JsonElement itemCountMin = itemCount.getAsJsonObject().get("min");
-                                        if (itemCountMin != null) {
+                                        if (itemCountMin != null && !itemCountMin.isJsonNull()) {
                                             itemCountMinValue = itemCountMin.getAsInt();
                                         }
                                     } else {
