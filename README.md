@@ -14,7 +14,9 @@
 
 Live test performed on dedicated server with 3 active players online, running custom Forge modpack with over 200 mods and [BlazeandCave's Advancements Pack](https://modrinth.com/datapack/blazeandcaves-advancements-pack), which adds over 950 advancements. Stats collected using Spark for one hour.
 
-With Icterine, InventoryChangeTrigger executes almost **twice as fast**, spending about 10% of the tick time instead of 20%.
+With Icterine, InventoryChangeTrigger executes almost **2.5 times faster** (as of version 1.1.0), spending about 7.5% of the tick time instead of 20%.
+
+Stats comparison for Icterine 1.0.0 (~2 times faster):
 
 ![Statistics](media/img_compare.png)
 
