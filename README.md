@@ -27,14 +27,16 @@ With Icterine, InventoryChangeTrigger executes almost **twice as fast**, spendin
 4. If criterion has slot count requirements and they don't match values from step 2, or if criterion doesn't have item requirements, criterion is skipped.
 5. If criterion has only one item requirement, changed stack is checked against this requirement.
 6. If criterion has multiple items requirements (e.g., "Cover me with debris" requires having full netherite armor set), **every** item stack in the inventory is checked against every requirement (but fulfilled requirements get removed and are no longer checked).
+7. Item matching, especially against tag, is very heavy. But the game first checks if the player's item type matches the one from the requirement, and only then checks other parameters like count, enchants and other NBT data.
 
 ## How Icterine's optimizations work
 
 1. In step 1, do not call InventoryChangeTrigger when you drop stacks or move them out of your inventory (e.g. to chest). This is controlled by the `ignore_triggers_for_emptied_stacks` parameter in config file.
 2. Similarly, do not call InventoryChangeTrigger if stack change was caused by decreasing stack but not emptying it (e.g. player dropped single item from the full stack). Controlled by `ignore_triggers_for_decreased_stacks`.
-3. And also do not call InventoryChangeTrigger if stack size increased, but hasn't passed threshold for any advancement. For example, dirt stack size increased from 52 to 53, but there's no advancement for getting 53 dirt in your modpack.
-3. Modify how game checks for changed items when player opens container screen, so it doesn't treat all the stack as changed the second you open anything. Controlled by `initialize_inventory_last_slots`.
-4. In step 6, firstly check if changed slot matches any requirement, and only then check other stack in the inventory. Controlled by `optimize_multiple_predicate_trigger`.
+3. And also do not call InventoryChangeTrigger if stack size increased, but hasn't passed threshold for any advancement. For example, dirt stack size increased from 52 to 53, but there's no advancement for getting 53 dirt in your modpack. Controlled by `optimize_triggers_for_increased_stacks`.
+4. Modify how game checks for changed items when player opens container screen, so it doesn't treat all the stack as changed the second you open anything. Controlled by `initialize_inventory_last_slots`.
+5. In step 6, firstly check if changed slot matches any requirement, and only then check other stack in the inventory. Controlled by `optimize_multiple_predicate_trigger`.
+6. In step 7, compare the stack count first to avoid unneeded tag matching. Also use previous stack count to avoid even more unneeded matching. Controlled by `check_count_before_item_predicate_match`.
 
 Further optimizations are planned.
 
