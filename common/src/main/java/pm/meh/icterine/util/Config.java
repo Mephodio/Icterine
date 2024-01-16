@@ -45,6 +45,7 @@ public class Config {
 
     private void load() throws IOException {
         if (!Files.exists(configPath)) {
+            Files.createDirectories(Paths.get("config"));
             Files.copy(Objects.requireNonNull(getClass().getResourceAsStream('/' + configFileName)), configPath);
         }
         try (Stream<String> lines = Files.lines(configPath)) {
