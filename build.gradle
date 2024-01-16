@@ -57,6 +57,7 @@ subprojects {
         def expandProps = [
                 "version": version,
                 "group": project.group, //Else we target the task's group.
+                "min_minecraft_version": min_minecraft_version,
                 "minecraft_version": minecraft_version,
                 "forge_version": forge_version,
                 "forge_loader_version_range": forge_loader_version_range,
