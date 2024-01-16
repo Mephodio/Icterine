@@ -44,4 +44,8 @@ Further optimizations are planned.
 
 ## Port to 1.x.x when
 
-Icterine will be ported to mc 1.18.2 and 1.20.x. If you need port to any other version, please open issue, or ask on [Discord](https://discord.gg/2SpfwvM7dm) server.
+Icterine v1.2.0 works with Minecraft Fabric from 1.18.2 to 1.19.4, and Forge from 1.18.2 to 1.19.2 *(forge moment)*. Although I haven't tested it thoroughly on every version, I checked the big ones and it should work fine.
+
+Version for 1.20.x will be released later.
+
+If you need port to any other version, please open an issue, or ask on [Discord](https://discord.gg/2SpfwvM7dm) server.
