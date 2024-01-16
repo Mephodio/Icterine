@@ -22,7 +22,8 @@ public class MixinPlugin implements IMixinConfigPlugin {
             "pm.meh.icterine.mixin.InventoryChangeTriggerMixin", Common.config.IGNORE_TRIGGERS_FOR_EMPTIED_STACKS
                     || Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS
                     || Common.config.OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS,
-            "pm.meh.icterine.mixin.ItemStackMixin", Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS,
+            "pm.meh.icterine.mixin.ItemStackMixin", Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS
+                    || Common.config.OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS,
             "pm.meh.icterine.mixin.AbstractContainerMenuMixinPlatform", Common.config.IGNORE_TRIGGERS_FOR_DECREASED_STACKS,
             "pm.meh.icterine.mixin.ItemPredicateMixin", Common.config.CHECK_COUNT_BEFORE_ITEM_PREDICATE_MATCH
     );
