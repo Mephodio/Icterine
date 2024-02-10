@@ -20,11 +20,7 @@ import pm.meh.icterine.util.LogHelper;
 import java.util.List;
 
 @Mixin(InventoryChangeTrigger.TriggerInstance.class)
-abstract class InventoryChangeTriggerInstanceMixin extends AbstractCriterionTriggerInstance {
-    public InventoryChangeTriggerInstanceMixin(ResourceLocation $$0, EntityPredicate.Composite $$1) {
-        super($$0, $$1);
-    }
-
+abstract class InventoryChangeTriggerInstanceMixin {
     /**
      * When the game checks if given inventoryChangeTrigger matches changed stack
      * and this trigger has only one predicate, game only checks if said trigger
