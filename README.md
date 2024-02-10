@@ -9,6 +9,7 @@
 * Even if it does affect something, advancement still should be obtainable by just dropping and picking up one of required items;
 * Currently, there are no known incompatibilities or issues;
 * Every injection into vanilla code can be disabled in config file.
+* All changes are server-side.
 
 ## Results
 
@@ -45,5 +46,7 @@ Stats comparison for Icterine 1.0.0 (~2 times faster):
 Icterine v1.2.0 works with Minecraft Fabric/Quilt from 1.18.2 to 1.19.4, and Forge from 1.18.2 to 1.19.2 *(forge moment)*.
 
 Icterine v1.3.0 has the same features as v1.2.0 and works with Fabric/Quilt 1.20 - 1.20.4, Forge 1.19.3 - 1.20.4, and NeoForge 1.20.1 - 1.20.4. 
+
+Use filter on the [versions page](https://modrinth.com/mod/icterine/versions) to choose the right file.
 
 If you need port to any other version, please open an issue, or ask on [Discord](https://discord.gg/2SpfwvM7dm) server.
