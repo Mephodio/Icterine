@@ -34,7 +34,7 @@ abstract class InventoryChangeTriggerInstanceMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;getContainerSize()I", ordinal = 0),
             locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     public void matches(Inventory inventory, ItemStack itemStack, int i, int j, int k,
-            CallbackInfoReturnable<Boolean> cir, List<ItemPredicate> predicatesList) {
+            CallbackInfoReturnable<Boolean> cir, int predicatesLength, List<ItemPredicate> predicatesList) {
         // If no predicate in list matches the changed item, the trigger not matches
         if (Common.config.OPTIMIZE_MULTIPLE_PREDICATE_TRIGGER
                 && !predicatesList.removeIf(itemPredicate -> itemPredicate.matches(itemStack))) {

@@ -10,8 +10,6 @@ import pm.meh.icterine.iface.IItemPredicateMixin;
 import pm.meh.icterine.iface.IItemStackMixin;
 import pm.meh.icterine.util.LogHelper;
 
-import java.util.Optional;
-
 @Mixin(ItemPredicate.class)
 public abstract class ItemPredicateMixin implements IItemPredicateMixin {
     @Final
@@ -28,15 +26,16 @@ public abstract class ItemPredicateMixin implements IItemPredicateMixin {
      */
     @Override
     public boolean icterine$fasterMatches(ItemStack itemStack) {
-        Optional<Integer> minThr = count.min();
-        Optional<Integer> maxThr = count.max();
+        Integer minThr = count.getMin();
+        Integer maxThr = count.getMax();
         int stackCount = itemStack.getCount();
         int prevStackCount = ((IItemStackMixin) (Object) itemStack).icterine$getPreviousStackSize();
 
-        LogHelper.debug(() -> "Checking stack %d for range [%d; %d]".formatted(stackCount, minThr.orElse(null), maxThr.orElse(null)));
+        LogHelper.debug(() -> "Checking stack %d for range [%d; %d]".formatted(stackCount, minThr, maxThr));
 
-        if ((minThr.map(integer -> (prevStackCount < integer && integer <= stackCount)).orElseGet(() -> prevStackCount == 0))
-                && (maxThr.isEmpty() || stackCount <= maxThr.get())) {
+        if ((minThr == null ? prevStackCount == 0 :
+                (prevStackCount < minThr && minThr <= stackCount))
+                && (maxThr == null || stackCount <= maxThr)) {
             return matches(itemStack);
         }
         return false;
