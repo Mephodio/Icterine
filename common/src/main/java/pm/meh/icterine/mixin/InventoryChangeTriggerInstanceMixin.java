@@ -1,10 +1,7 @@
 package pm.meh.icterine.mixin;
 
-import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
-import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,7 +34,7 @@ abstract class InventoryChangeTriggerInstanceMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;getContainerSize()I", ordinal = 0),
             locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     public void matches(Inventory inventory, ItemStack itemStack, int i, int j, int k,
-            CallbackInfoReturnable<Boolean> cir, int predicatesLength, List<ItemPredicate> predicatesList) {
+            CallbackInfoReturnable<Boolean> cir, List<ItemPredicate> predicatesList) {
         // If no predicate in list matches the changed item, the trigger not matches
         if (Common.config.OPTIMIZE_MULTIPLE_PREDICATE_TRIGGER
                 && !predicatesList.removeIf(itemPredicate -> itemPredicate.matches(itemStack))) {
@@ -54,7 +51,7 @@ abstract class InventoryChangeTriggerInstanceMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/advancements/critereon/ItemPredicate;matches(Lnet/minecraft/world/item/ItemStack;)Z"))
     public boolean itemPredicateMatches(ItemPredicate itemPredicate, ItemStack itemStack) {
         if (Common.config.CHECK_COUNT_BEFORE_ITEM_PREDICATE_MATCH) {
-            return ((IItemPredicateMixin) itemPredicate).icterine$fasterMatches(itemStack);
+            return ((IItemPredicateMixin) (Object) itemPredicate).icterine$fasterMatches(itemStack);
         } else {
             return itemPredicate.matches(itemStack);
         }

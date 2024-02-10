@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -12,6 +13,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import pm.meh.icterine.Common;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class ReloadListenerHandlerBase extends SimpleJsonResourceReloadListener {
     private static final Gson GSON = (new GsonBuilder()).create();
@@ -34,7 +36,7 @@ public class ReloadListenerHandlerBase extends SimpleJsonResourceReloadListener 
         if (Common.config.OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS) {
             StackSizeThresholdManager.clear();
 
-            String inventoryChangedTriggerId = CriteriaTriggers.INVENTORY_CHANGED.getId().toString();
+            String inventoryChangedTriggerId = Objects.requireNonNull(BuiltInRegistries.TRIGGER_TYPES.getKey(CriteriaTriggers.INVENTORY_CHANGED)).toString();
 
             for (JsonElement advancementElement : object.values()) {
                 JsonObject advancementCriteria = advancementElement.getAsJsonObject().getAsJsonObject("criteria");
