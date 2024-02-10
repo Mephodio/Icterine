@@ -36,7 +36,7 @@ public class ReloadListenerHandlerBase extends SimpleJsonResourceReloadListener 
         if (Common.config.OPTIMIZE_TRIGGERS_FOR_INCREASED_STACKS) {
             StackSizeThresholdManager.clear();
 
-            String inventoryChangedTriggerId = Objects.requireNonNull(BuiltInRegistries.TRIGGER_TYPES.getKey(CriteriaTriggers.INVENTORY_CHANGED)).toString();
+            String inventoryChangedTriggerId = Objects.requireNonNull(CriteriaTriggers.getId(CriteriaTriggers.INVENTORY_CHANGED)).toString();
 
             for (JsonElement advancementElement : object.values()) {
                 JsonObject advancementCriteria = advancementElement.getAsJsonObject().getAsJsonObject("criteria");
