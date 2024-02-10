@@ -1,15 +1,16 @@
 package pm.meh.icterine;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import pm.meh.icterine.neoforge.ReloadListenerHandler;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import pm.meh.icterine.impl.ReloadListenerHandlerBase;
 
 @Mod(Common.MOD_ID)
 public class Icterine {
     
-    public Icterine() {
+    public Icterine(IEventBus eventBus) {
         Common.init();
 
-        MinecraftForge.EVENT_BUS.register(ReloadListenerHandler.class);
+        eventBus.addListener((AddReloadListenerEvent event) -> event.addListener(new ReloadListenerHandlerBase()));
     }
 }

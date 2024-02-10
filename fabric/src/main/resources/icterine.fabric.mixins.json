@@ -6,7 +6,6 @@
     "compatibilityLevel": "JAVA_17",
     "plugin": "pm.meh.icterine.util.MixinPlugin",
     "mixins": [
-        "fabric.AbstractContainerMenuMixin"
     ],
     "client": [
     ],
