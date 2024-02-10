@@ -40,12 +40,10 @@ Stats comparison for Icterine 1.0.0 (~2 times faster):
 5. In step 6, firstly check if changed slot matches any requirement, and only then check other stack in the inventory. Controlled by `optimize_multiple_predicate_trigger`.
 6. In step 7, compare the stack count first to avoid unneeded tag matching. Also use previous stack count to avoid even more unneeded matching. Controlled by `check_count_before_item_predicate_match`.
 
-Further optimizations are planned.
+## Supported versions
 
-## Port to 1.x.x when
+Icterine v1.2.0 works with Minecraft Fabric/Quilt from 1.18.2 to 1.19.4, and Forge from 1.18.2 to 1.19.2 *(forge moment)*.
 
-Icterine v1.2.0 works with Minecraft Fabric from 1.18.2 to 1.19.4, and Forge from 1.18.2 to 1.19.2 *(forge moment)*. Although I haven't tested it thoroughly on every version, I checked the big ones and it should work fine.
-
-Version for 1.20.x will be released later.
+Icterine v1.3.0 has the same features as v1.2.0 and works with Fabric/Quilt 1.20 - 1.20.4, Forge 1.19.3 - 1.20.4, and NeoForge 1.20.1 - 1.20.4. 
 
 If you need port to any other version, please open an issue, or ask on [Discord](https://discord.gg/2SpfwvM7dm) server.
